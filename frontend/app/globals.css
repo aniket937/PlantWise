@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ tokens
+   A calm, botanical palette: ivory paper, deep forest ink, sage and a single
+   warm gold accent for attention. No gradients, no glass, no neon.
+   Both themes are defined so the surface never falls back to unstyled white.
+--------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --background: #f7f5ec;
+  --surface: #ffffff;
+  --surface-2: #f1efe4;
+  --foreground: #26332b;
+  --muted: #68746b;
+  --border: #dde3d8;
+  --border-strong: #c3cfbc;
+
+  --primary: #244b35;
+  --primary-hover: #2e5f43;
+  --primary-foreground: #f7f5ec;
+
+  --accent: #b8823f;
+  --accent-soft: #f2e3cd;
+
+  --sage: #dce7d5;
+  --sage-strong: #c5d8be;
+
+  --pass: #2f6b45;
+  --pass-soft: #e2efe5;
+  --caution: #8a6216;
+  --caution-soft: #f7ecd4;
+  --fail: #9c3f2a;
+  --fail-soft: #f7e3dd;
+  --unknown: #5f6b64;
+  --unknown-soft: #eceae2;
+
+  --focus: #1d6bb0;
+  --shadow: 0 1px 2px rgb(38 51 43 / 0.06), 0 8px 24px -12px rgb(38 51 43 / 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --background: #0e1512;
+    --surface: #16201b;
+    --surface-2: #1c2823;
+    --foreground: #e7ede5;
+    --muted: #9fada4;
+    --border: #2a3831;
+    --border-strong: #3b4d44;
+
+    --primary: #86b997;
+    --primary-hover: #9ecbab;
+    --primary-foreground: #0e1512;
+
+    --accent: #d9a66c;
+    --accent-soft: #2e2718;
+
+    --sage: #22302a;
+    --sage-strong: #2d3f36;
+
+    --pass: #7fc79b;
+    --pass-soft: #1a2c22;
+    --caution: #e0b466;
+    --caution-soft: #2e2717;
+    --fail: #e79179;
+    --fail-soft: #33201b;
+    --unknown: #a8b3ab;
+    --unknown-soft: #232a26;
+
+    --focus: #6fb0e8;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-sage: var(--sage);
+  --color-sage-strong: var(--sage-strong);
+  --color-pass: var(--pass);
+  --color-pass-soft: var(--pass-soft);
+  --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --color-fail: var(--fail);
+  --color-fail-soft: var(--fail-soft);
+  --color-unknown: var(--unknown);
+  --color-unknown-soft: var(--unknown-soft);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 0.75rem;
+}
+
+/* ------------------------------------------------------------------- base */
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04";
+  text-rendering: optimizeLegibility;
+}
+
+/* A single, consistent, high-contrast focus ring everywhere. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--sage-strong);
+  color: var(--foreground);
+}
+
+/* Screen-reader-only helper for labels that must exist but not be seen. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Respect the user's motion preference: no transitions, no animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Leaflet needs its own container height and must not inherit app borders. */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: var(--surface-2);
+  font-family: var(--font-sans);
+  z-index: 0;
+}
+
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--surface) 88%, transparent) !important;
+  color: var(--muted) !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--primary) !important;
+}
